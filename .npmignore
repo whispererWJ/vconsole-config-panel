@@ -1,0 +1,37 @@
+# 源码
+src/
+examples/
+*.ts
+!*.d.ts
+
+# 开发文件
+.git/
+.github/
+.gitignore
+.npmrc
+.npmignore
+node_modules/
+*.log
+*.tgz
+
+# 配置文件
+tsconfig.json
+rollup.config.js
+.editorconfig
+
+# IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 测试
+test/
+__tests__/
+coverage/
+
+# 忽略 examples_dist 文件夹
+examples_dist/
+
+# 忽略html
+*.html
