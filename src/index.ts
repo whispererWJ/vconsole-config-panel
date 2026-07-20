@@ -1,4 +1,3 @@
-// src/index.ts
 import VConsole from 'vconsole';
 import type { PanelOptions } from './types';
 import { styles } from './styles';

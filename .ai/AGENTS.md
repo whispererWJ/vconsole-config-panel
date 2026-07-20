@@ -118,10 +118,11 @@ UI自动化测试流程如下：
 ```
 tests/
 └── ui/
-    └── config-panel-ui.test.ts    # UI自动化测试用例
-examples/
-├── ui-test-demo.html             # 基础功能UI测试示例
-└── encrypted-config-demo.html    # 加密功能UI测试示例
+    └── performance.test.ts    # UI自动化测试用例-性能
+    └── vconsole.test.ts       # UI自动化测试用例-交互
+└── unit/
+    └── crypto.test.ts    # 单元测试-加密
+    └── helper.test.ts    # 单元测试-工具函数
 ```
 
 ### 运行UI测试

@@ -1,4 +1,3 @@
-// src/helper.ts
 import type { ConfigGroup, ConfigItem, EncryptionConfig } from './types';
 import { encryptData as encryptDataWithCrypto, decryptData } from './crypto';
 

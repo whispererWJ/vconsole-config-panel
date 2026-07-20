@@ -1,4 +1,3 @@
-// src/browser.ts
 import VConsoleConfigPanel from './index';
 import * as crypto from './crypto';
 import * as helper from './helper';

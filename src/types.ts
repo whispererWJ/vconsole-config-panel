@@ -1,4 +1,3 @@
-// src/types.ts
 export interface ConfigItem {
   label: string;
   field?: string;

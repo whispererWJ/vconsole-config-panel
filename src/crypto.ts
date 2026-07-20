@@ -1,4 +1,3 @@
-// src/crypto.ts
 /**
  * 加密工具模块
  * 支持AES和RSA加密
