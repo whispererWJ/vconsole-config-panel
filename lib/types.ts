@@ -1,7 +1,9 @@
+
+
 export interface ConfigItem {
   label: string;
   field?: string;
-  getValue?: () => string | number | boolean | null | undefined;
+  getValue?: (state: Record<string, any>) => string | number | boolean | null | undefined;
   settable?: boolean;
 }
 

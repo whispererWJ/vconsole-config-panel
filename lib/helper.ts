@@ -1,3 +1,4 @@
+// src/helper.ts
 import type { ConfigGroup, ConfigItem, EncryptionConfig } from './types';
 import { encryptData as encryptDataWithCrypto, decryptData } from './crypto';
 
@@ -13,13 +14,35 @@ function generatePanelId(): string {
  */
 export function getItemValue(item: ConfigItem, state: Record<string, any>): string {
   if (item.getValue) {
-    const result = item.getValue();
+    const result = item.getValue(state);
     return String(result ?? '');
   }
   if (item.field && state[item.field] !== undefined) {
     return String(state[item.field] ?? '');
   }
   return '-';
+}
+
+/**
+ * HTML转义 - 支持 Node 和浏览器环境
+ */
+function escapeHtml(text: string): string {
+  // 浏览器环境
+  if (typeof document !== 'undefined' && document.createElement) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  // Node 环境 - 使用简单的转义
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, function(m) { return map[m] || m; });
 }
 
 /**
@@ -71,15 +94,6 @@ export function generateHtmlWithId(items: ConfigGroup[], state: Record<string, a
 // 兼容旧接口 - 保持向后兼容
 export function generateHtml(items: ConfigGroup[], state: Record<string, any> = {}): string {
   return generateHtmlWithId(items, state).html;
-}
-
-/**
- * HTML转义
- */
-function escapeHtml(text: string): string {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
 }
 
 /**

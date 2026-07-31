@@ -49,7 +49,7 @@ function base64ToArrayBuffer(base64: string): ArrayBuffer {
  * 将字符串安全地转换为BufferSource
  */
 function toBufferSource(data: Uint8Array): BufferSource {
-  return data.buffer as ArrayBuffer;
+  return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength) as ArrayBuffer;
 }
 
 /**
@@ -167,10 +167,10 @@ export async function aesDecrypt(encryptedData: string, config: AESConfig): Prom
  */
 export async function rsaEncrypt(data: string, config: RSAConfig): Promise<string> {
   try {
-    const publicKeyData = stringToUint8Array(config.publicKey);
+    const publicKeyData = base64ToArrayBuffer(config.publicKey);
     const publicKey = await crypto.subtle.importKey(
       'spki',
-      toBufferSource(publicKeyData),
+      publicKeyData,
       {
         name: 'RSA-OAEP',
         hash: 'SHA-256',
@@ -204,10 +204,10 @@ export async function rsaDecrypt(encryptedData: string, config: RSAConfig): Prom
   }
 
   try {
-    const privateKeyData = stringToUint8Array(config.privateKey);
+    const privateKeyData = base64ToArrayBuffer(config.privateKey);
     const privateKey = await crypto.subtle.importKey(
       'pkcs8',
-      toBufferSource(privateKeyData),
+      privateKeyData,
       {
         name: 'RSA-OAEP',
         hash: 'SHA-256',

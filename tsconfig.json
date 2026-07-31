@@ -1,24 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
+    "target": "ES2020",
     "module": "ESNext",
-    "lib": ["ES2015", "DOM"],
-    "declaration": true,
-    "declarationDir": "./dist",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "bundler",  // ← 从 "node" 改为 "bundler"
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./dist",
+    "rootDir": ".",
+    "types": ["vitest/globals"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
-  "include": ["src/**/*", "tests/**/*", "vitest.config.ts"],  // ← 添加配置文件
-  "exclude": ["node_modules", "dist", "examples"]
+  "include": ["lib/**/*", "src/**/*", "./tests/**/*"],
+  "exclude": ["node_modules", "dist"],
 }

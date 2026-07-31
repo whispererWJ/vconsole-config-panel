@@ -5,9 +5,6 @@ import {
   generateHtmlWithId,
   initPanelById,
   refreshPanelData,
-  showToast,
-  encryptDataWithConfig,
-  decryptDataWithConfig
 } from './helper';
 
 // 导出加密工具

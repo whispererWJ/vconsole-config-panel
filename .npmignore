@@ -1,6 +1,6 @@
 # 源码
 src/
-examples/
+lib/
 *.ts
 !*.d.ts
 
@@ -13,11 +13,18 @@ examples/
 node_modules/
 *.log
 *.tgz
+package-lock.json
+vite.config.e2e.ts
+vite.config.ts
+vite.config.lib.ts
 
 # 配置文件
 tsconfig.json
 rollup.config.js
 .editorconfig
+.env
+.eslintrc.js
+playwright.config.ts
 
 # IDE文件
 .vscode/

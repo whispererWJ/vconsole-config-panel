@@ -1,39 +1,21 @@
-// vite.config.ts
-import { defineConfig } from "vite";
-import { resolve } from "path";
-import vue from '@vitejs/plugin-vue';
+// vite.config.ts - 主配置文件，根据命令行参数决定使用哪个配置
+import { defineConfig, mergeConfig } from "vite";
+import libConfig from "./vite.config.lib.ts";
+import e2eConfig from "./vite.config.e2e.ts";
 
-export default defineConfig({
-  plugins: [vue()], // 添加Vue插件以支持.vue文件
-  build: {
-    // 库构建配置
-    lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      name: "VConsoleConfigPanel",
-      formats: ["es", "cjs", "umd"],
-      fileName: (format) => {
-        if (format === "es") return "index.esm.js";
-        if (format === "cjs") return "index.cjs.js";
-        if (format === "umd") return "index.js";
-        return `index.${format}.js`;
-      },
-    },
-    rollupOptions: {
-      external: ["vconsole"],
-      output: {
-        globals: {
-          vconsole: "VConsole",
-        },
-        exports: "named",
-      },
-    },
-    sourcemap: true,
-    minify: "esbuild",
-  },
-  resolve: {
-    alias: {
-      "@": resolve(__dirname, "src"),
-      "examples": resolve(__dirname, "examples"),
-    },
+// 根据环境变量或命令行参数选择配置
+const mode =
+  process.env.VITE_BUILD_MODE ||
+  (process.argv.includes("--mode=e2e") ? "e2e" : "lib");
+
+export default defineConfig(() => {
+  if (mode === "lib") {
+    return mergeConfig(libConfig, {
+      // 特定于库的额外配置
+    });
+  } else {
+    return mergeConfig(e2eConfig, {
+      // 特定于E2E测试的额外配置
+    });
   }
 });
